@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS T-3</title>
+</head>
+<body>
+    <script>
+        function getObject(obj) {
+  const uniqueEntries = {};
+  
+  for (const [index, entry] of Object.entries(obj)) {
+    const { marks, age, name } = entry;
+    
+    if (!uniqueEntries.hasOwnProperty(marks)) {
+      uniqueEntries[marks] = { age, name, index };
+    } else {
+      const existingEntry = uniqueEntries[marks];
+      if (age < existingEntry.age) {
+        uniqueEntries[marks] = { age, name, index };
+      }
+    }
+  }
+  
+  const result = {};
+  for (const [index, entry] of Object.entries(uniqueEntries)) {
+    result[entry.index] = { age: entry.age, name: entry.name, marks: index };
+  }
+  
+  return result;
+}
+const input = {
+  "0": { age: 18, name: "john", marks: "400" },
+  "1": { age: 17, name: "julie", marks: "400" },
+  "2": { age: 16, name: "Robin", marks: "200" },
+  "3": { age: 16, name: "Bella", marks: "300" }
+};
+
+console.log(getObject(input));
+
+    </script>
+</body>
+</html>
